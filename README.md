@@ -12,9 +12,7 @@ The current version introduces a virtual camera with real-time background blur t
 
 ### Getting Started
 
-### Quick Start Guide - Background Blur for OBS
-#### Step-by-Step Setup
-
+#### Quick Start Guide - Background Blur for OBS
 
 #### 1. Install Dependencies
 
