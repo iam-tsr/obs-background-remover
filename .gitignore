@@ -5,3 +5,8 @@ __pycache__/
 *.pyo
 *.pyd
 *.swp
+
+
+builddir/
+repo/
+.flatpak-builder/

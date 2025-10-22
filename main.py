@@ -5,8 +5,6 @@ import time
 import sys
 import argparse
 import pyvirtualcam
-from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
 import os
 
 # Initialize MediaPipe Image Segmenter
@@ -28,18 +26,15 @@ def result_callback(result, output_image: mp.Image, timestamp_ms: int):
 
 def blur_background(frame, mask, blur_strength=35):
     """Apply blur to background using the segmentation mask."""
-    # Ensure blur_strength is odd
     if blur_strength % 2 == 0:
         blur_strength += 1
     
-    # Resize mask to match frame dimensions if needed
     if mask.shape[:2] != frame.shape[:2]:
         mask = cv2.resize(mask, (frame.shape[1], frame.shape[0]))
     
     # Normalize mask to [0, 1] range
     mask_normalized = mask.astype(np.float64)
     
-    # Expand mask to 3 channels for blending
     mask_3channel = np.stack([mask_normalized] * 3, axis=-1)
     
     # Create blurred version of the entire frame
@@ -51,7 +46,6 @@ def blur_background(frame, mask, blur_strength=35):
     return output
 
 def get_model_path():
-    # When running as Flatpak
     flatpak_path = '/app/share/background-blur/selfie_segmenter_landscape.tflite'
     if os.path.exists(flatpak_path):
         return flatpak_path
@@ -77,11 +71,9 @@ def main():
     parser.add_argument('--preview', action='store_true', help='Show preview window')
     args = parser.parse_args()
     
-    # Model path
     model_path = args.model
     blur_strength = args.blur
     
-    # Ensure blur_strength is odd
     if blur_strength % 2 == 0:
         blur_strength += 1
     
@@ -115,6 +107,8 @@ def main():
     print(f"Blur strength: {blur_strength}")
     print(f"Press Ctrl+C to stop")
     
+
+    # Initialize frame counter
     frame_count = 0
     
     # FPS calculation variables
