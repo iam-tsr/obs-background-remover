@@ -38,7 +38,7 @@ python ./virtual_camera.py
 python ./virtual_camera.py --preview
 ```
 
-**Other parameters**
+**Other arguments**
 
 ```bash
 --input N       Use /dev/videoN as input (default: 0)
