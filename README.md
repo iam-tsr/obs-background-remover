@@ -2,7 +2,7 @@
 
 An initiative to support creators and streamers who use Linux operating systems, with a focus on providing high-quality tools to simplify their workflows through this project.
 
-Currently, this project is standalone and supports <u>**only Fedora’s Wayland version**</u>.
+Currently, this project is standalone and supports <u>**Fedora only**</u>.
 
 Our ongoing development aims to continually enhance the model and user experience while optimizing system resource usage.
 ​
