@@ -29,13 +29,13 @@ source run.sh
 **To start the virtual camera, with no preview:**
 
 ```python
-python ./virtual_camera.py
+python ./main.py
 ```
 
 **With preview**
 
 ```python
-python ./virtual_camera.py --preview
+python ./main.py --preview
 ```
 
 **Other arguments**
@@ -50,7 +50,7 @@ python ./virtual_camera.py --preview
 
 Example:
 
-   ./virtual_camera.py --input 0 --blur 75
+   ./main.py --input 0 --blur 75
 ```
 
 ### Contribution
