@@ -14,12 +14,19 @@ if ! modinfo v4l2loopback &> /dev/null; then
         sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         sudo dnf install v4l2loopback
         
+        if modinfo v4l2loopback &> /dev/null; then
+            echo "✓ v4l2loopback installed successfully."
+        else
+            echo "✗ v4l2loopback installation failed. Please try again running the script."
+            exit 1
+        fi
+
     else
         echo "Please install v4l2loopback manually, then run this script again."
         exit 1
     fi
 else
-    echo "✓ v4l2loopback is installed"
+    echo "✓ v4l2loopback is already installed."
 fi
 
 echo ""
@@ -29,25 +36,14 @@ echo "====================================="
 echo ""
 
 # Prompt user for installation method
-echo "How you want to install dependencies? (virtualenv(v)/global(g))"
-read -p "Enter your choice: " choice
-if [[ $choice == "virtualenv" || $choice == "v" ]]; then
-    echo "Creating virtual environment..."
-    python3.11 -m venv venv
-    source venv/bin/activate
-    echo "Installing dependencies in virtual environment..."
-    pip install -r requirements.txt
-    echo "Dependencies installed successfully."
+echo "Installing dependencies by creating a virtual environment..."
 
-elif [[ $choice == "global" || $choice == "g" ]]; then
-    echo "Installing dependencies globally..."
-    sudo pip install -r requirements.txt
-    echo "Dependencies installed successfully."
-
-else
-    echo "Invalid choice. Please run the script again and choose either 'virtualenv' or 'global'."
-    exit 1
-fi
+echo "Creating virtual environment..."
+python3.11 -m venv venv
+source venv/bin/activate
+echo "Installing dependencies in virtual environment..."
+pip install -r requirements.txt
+echo "Dependencies installed successfully."
 
 # User Guide
 echo ""
@@ -56,7 +52,7 @@ echo "Setup Complete!"
 echo "====================================="
 echo ""
 echo "To start the virtual camera, run:"
-echo "  ./virtual_camera.py --preview"
+echo "  ./main.py"
 echo ""
 echo "Once running, you can add it as a Video Capture Device in OBS:"
 echo "  1. Open OBS"
@@ -72,5 +68,5 @@ echo "  --height N      Set output height (default: 480)"
 echo "  --fps N         Set output FPS (default: 30)"
 echo ""
 echo "Example:"
-echo "  ./virtual_camera.py --input 0 --blur 75"
+echo "  ./main.py --input 0 --blur 75"
 echo ""

@@ -46,12 +46,7 @@ def blur_background(frame, mask, blur_strength=35):
     return output
 
 def get_model_path():
-    flatpak_path = '/app/share/background-blur/selfie_segmenter_landscape.tflite'
-    if os.path.exists(flatpak_path):
-        return flatpak_path
-    
-    # When running locally (development)
-    local_path = os.path.join(os.path.dirname(__file__), 'selfie_segmenter_landscape.tflite')
+    local_path = os.path.join(os.path.dirname(__file__), 'model/selfie_segmenter_landscape.tflite')
     if os.path.exists(local_path):
         return local_path
     
